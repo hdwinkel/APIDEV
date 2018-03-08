@@ -2,7 +2,9 @@ package de.egladil.winkel;
 
 import org.skife.jdbi.v2.DBI;
 
+import de.egladil.winkel.db.RawMeterMeasureDao;
 import de.egladil.winkel.health.DatabaseHealthCheck;
+import de.egladil.winkel.resources.RawMeterMeasureResource;
 import io.dropwizard.Application;
 import io.dropwizard.db.PooledDataSourceFactory;
 import io.dropwizard.jdbi.DBIFactory;
@@ -40,7 +42,10 @@ public class APIDevServerApplication extends Application<APIDevServerConfigurati
       final DBIFactory factory = new DBIFactory();
       final DBI jdbi = factory.build(environment, configuration.getDataSourceFactory(), "mysql");
 
-/*      
+      final RawMeterMeasureDao dao = jdbi.onDemand(RawMeterMeasureDao.class);
+      environment.jersey().register(new RawMeterMeasureResource(dao));
+            
+      /*      
       final MyDao dao = jdbi.onDemand(MyDao.class);
 
       environment.jersey().register(new HtmlPageResource());

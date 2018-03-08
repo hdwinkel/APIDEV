@@ -3,6 +3,14 @@ logging:
   loggers:
     de.egladil.winkel: DEBUG
 
+server:
+  applicationConnectors:
+  - type: http 
+    port: 8880
+  adminConnectors:
+  - type: http
+    port: 8881
+
     # Database settings.
 database:
     # the name of the JDBC driver, mysql in our case
